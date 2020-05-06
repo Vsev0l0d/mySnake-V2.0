@@ -32,8 +32,8 @@ class Snake:
 
     def snake_body_mechanism(self, score, food_pos, screen_width, screen_height):
         self.snake_body.insert(0, list(self.snake_head_pos))
-        if hypot(self.snake_head_pos[0] - food_pos[0],
-                 self.snake_head_pos[1] - food_pos[1]) < 30:
+        if (hypot(self.snake_head_pos[0] - food_pos[0],
+                  self.snake_head_pos[1] - food_pos[1]) < 30):
             while True:
                 check = True
                 for pos in self.snake_body:
@@ -59,19 +59,20 @@ class Snake:
     def check_for_boundaries(self, game_over, screen_width, screen_height):
         if self.snake_head_pos[0] > screen_width - 30:
             self.is_the_head_in_the_field = False
-            self.snake_head_pos[0] = 0
-        elif self.snake_head_pos[0] < 30:
+            self.snake_head_pos[0] = -30
+        elif (self.snake_head_pos[0] < 30) & (self.snake_head_pos[0] != 0):
             self.is_the_head_in_the_field = False
             self.snake_head_pos[0] = screen_width
         elif self.snake_head_pos[1] > screen_height - 30:
             self.is_the_head_in_the_field = False
-            self.snake_head_pos[1] = 0
-        elif self.snake_head_pos[1] < 30:
+            self.snake_head_pos[1] = -30
+        elif (self.snake_head_pos[1] < 30) & (self.snake_head_pos[1] != 0):
             self.is_the_head_in_the_field = False
             self.snake_head_pos[1] = screen_height
         else:
             self.is_the_head_in_the_field = True
         for block in self.snake_body[1:]:
-            if hypot(self.snake_head_pos[0] - block[0],
-                     self.snake_head_pos[1] - block[1]) < 30:
+            if (hypot(self.snake_head_pos[0] - block[0],
+                      self.snake_head_pos[1] - block[1]) < 30) & (hypot(self.snake_head_pos[0] - block[0],
+                                                                        self.snake_head_pos[1] - block[1]) != 0):
                 game_over()
