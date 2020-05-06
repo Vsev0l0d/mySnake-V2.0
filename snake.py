@@ -34,11 +34,16 @@ class Snake:
         self.snake_body.insert(0, list(self.snake_head_pos))
         if hypot(self.snake_head_pos[0] - food_pos[0],
                  self.snake_head_pos[1] - food_pos[1]) < 30:
-            for pos in self.snake_body:
-                while hypot(pos[0] - food_pos[0],
-                            pos[1] - food_pos[1]) < 30:
-                    food_pos = [random.randrange(1, screen_width // 30) * 30,
-                                random.randrange(1, screen_height // 30) * 30]
+            while True:
+                check = True
+                for pos in self.snake_body:
+                    if hypot(pos[0] - food_pos[0],
+                             pos[1] - food_pos[1]) < 30:
+                        check = False
+                        food_pos = [random.randrange(1, screen_width // 30) * 30,
+                                    random.randrange(1, screen_height // 30) * 30]
+                if check:
+                    break
             score += 1
         else:
             self.snake_body.pop()
