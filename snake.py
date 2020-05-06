@@ -72,7 +72,6 @@ class Snake:
         else:
             self.is_the_head_in_the_field = True
         for block in self.snake_body[1:]:
-            if (hypot(self.snake_head_pos[0] - block[0],
-                      self.snake_head_pos[1] - block[1]) < 30) & (hypot(self.snake_head_pos[0] - block[0],
-                                                                        self.snake_head_pos[1] - block[1]) != 0):
+            if hypot(self.snake_head_pos[0] - block[0],
+                     self.snake_head_pos[1] - block[1]) < 30:
                 game_over()
